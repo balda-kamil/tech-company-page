@@ -3,7 +3,11 @@
     "allow": [
       "WebFetch(domain:api.anthropic.com)",
       "Bash(gunzip -c \"/Users/kamilbalda/.claude/projects/-Users-kamilbalda-Projects-sinsitech/9b3afeca-b0ec-4f3a-94c0-bef79345716f/tool-results/webfetch-1776667116700-ufyme1.bin\")",
-      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --no-src-dir --import-alias \"@/*\" --yes)"
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --no-src-dir --import-alias \"@/*\" --yes)",
+      "Bash(npx next *)",
+      "Bash(npx tsc *)",
+      "Bash(npx eslint *)",
+      "Bash(npm run *)"
     ]
   }
 }
