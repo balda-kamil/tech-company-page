@@ -7,7 +7,14 @@
       "Bash(npx next *)",
       "Bash(npx tsc *)",
       "Bash(npx eslint *)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(gunzip -c \"/Users/kamilbalda/.claude/projects/-Users-kamilbalda-Projects-sinsitech/21c8094b-8ea4-460c-8ddd-efd6acba3a63/tool-results/webfetch-1777031900662-ke4i42.bin\")",
+      "Bash(tar -x -C /tmp/sinsitech_design)",
+      "Read(//tmp/**)",
+      "Bash(cp \"/Users/kamilbalda/.claude/projects/-Users-kamilbalda-Projects-sinsitech/a51f7fea-91b7-4027-a37b-6ff10c5d3c65/tool-results/webfetch-1777045136547-j75hip.bin\" /tmp/design.gz)",
+      "Bash(gunzip -f /tmp/design.gz)",
+      "Bash(mkdir -p /tmp/design_extracted)",
+      "Bash(tar -xf /tmp/design -C /tmp/design_extracted)"
     ]
   }
 }

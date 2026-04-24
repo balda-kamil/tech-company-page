@@ -9,7 +9,7 @@
   --text: #e8e8f0;
   --text-dim: #6b6b7e;
   --text-muted: #3a3a4e;
-  --gold: oklch(0.65 0.2 25);
+  --gold: oklch(0.65 0.20 25);
   --gold-dim: oklch(0.45 0.14 25);
   --blue: oklch(0.65 0.18 235);
   --blue-dim: oklch(0.45 0.12 235);

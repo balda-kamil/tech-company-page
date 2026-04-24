@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
+import Nav from "./components/Nav";
+import Footer from "./components/Footer";
 
 /* ─── SVG Icons ─── */
 const ArrowRight = () => (
@@ -61,27 +63,6 @@ function SectionLabel({ num, children }: { num: string; children: React.ReactNod
   );
 }
 
-/* ─── Nav ─── */
-function Nav() {
-  return (
-    <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 60px", height: "72px", background: "rgba(17,17,19,0.9)", backdropFilter: "blur(20px)", borderBottom: "1px solid var(--border)" }}>
-      <a href="#" style={{ fontSize: "20px", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--text)", textDecoration: "none" }}>
-        Sinsi<span style={{ color: "var(--gold)" }}>Tech</span>
-      </a>
-      <ul style={{ display: "flex", alignItems: "center", gap: "36px", listStyle: "none" }}>
-        {[["#uslugi","Usługi"],["#dlaczego","O nas"],["#materialy","Materiały"],["#proces","Proces"],["#opinie","Opinie"]].map(([href,label]) => (
-          <li key={href}><a href={href} style={{ fontSize: "13px", fontWeight: 500, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--text-dim)", textDecoration: "none", transition: "color 0.2s" }} onMouseEnter={hoverDim} onMouseLeave={hoverDimOut}>{label}</a></li>
-        ))}
-        <li>
-          <a href="#wycena" style={{ fontSize: "13px", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", color: "#09090e", textDecoration: "none", background: "var(--gold)", padding: "10px 22px", borderRadius: "2px", transition: "opacity 0.2s" }}
-            onMouseEnter={e => e.currentTarget.style.opacity = "0.85"} onMouseLeave={e => e.currentTarget.style.opacity = "1"}>
-            Wyceń projekt
-          </a>
-        </li>
-      </ul>
-    </nav>
-  );
-}
 
 /* ─── Hero ─── */
 function Hero() {
@@ -398,6 +379,194 @@ function Testimonials() {
   );
 }
 
+/* ─── Gallery / Realizacje ─── */
+function Gallery() {
+  const gridPattern = (id: string) => (
+    <defs>
+      <pattern id={id} width="20" height="20" patternUnits="userSpaceOnUse">
+        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="0.5" />
+      </pattern>
+    </defs>
+  );
+  const cards = [
+    {
+      meta: "CNC / POM-C", title: "Koło zębate napędu",
+      desc: "Frezowanie CNC z pręta POM-C, tolerancja ±0,05 mm. Seria 20 szt. dla automatyki przenośnika.",
+      code: "CNC-001 // POM-C",
+      svg: (id: string) => (
+        <svg viewBox="0 0 320 240" width="100%" style={{ opacity: 0.85 }}>
+          {gridPattern(id)}<rect width="320" height="240" fill={`url(#${id})`} />
+          <g transform="translate(160,120)">
+            <circle r="55" fill="none" stroke="var(--gold)" strokeWidth="1" />
+            <circle r="35" fill="none" stroke="var(--gold)" strokeWidth="0.7" strokeDasharray="3 3" />
+            <circle r="12" fill="none" stroke="var(--gold)" strokeWidth="1.2" />
+            <circle r="5" fill="var(--gold)" opacity="0.4" />
+            <g stroke="var(--gold)" strokeWidth="1" fill="none">
+              <rect x="-5" y="-68" width="10" height="14" rx="1" /><rect x="-5" y="54" width="10" height="14" rx="1" />
+              <rect x="54" y="-5" width="14" height="10" rx="1" /><rect x="-68" y="-5" width="14" height="10" rx="1" />
+              <rect x="34" y="-58" width="10" height="14" rx="1" transform="rotate(45 39 -51)" />
+              <rect x="-44" y="-58" width="10" height="14" rx="1" transform="rotate(-45 -39 -51)" />
+              <rect x="34" y="44" width="10" height="14" rx="1" transform="rotate(-45 39 51)" />
+              <rect x="-44" y="44" width="10" height="14" rx="1" transform="rotate(45 -39 51)" />
+            </g>
+            <line x1="-85" y1="0" x2="-65" y2="0" stroke="rgba(255,255,255,0.2)" strokeWidth="0.5" />
+            <line x1="65" y1="0" x2="85" y2="0" stroke="rgba(255,255,255,0.2)" strokeWidth="0.5" />
+            <line x1="-85" y1="-3" x2="-85" y2="3" stroke="rgba(255,255,255,0.2)" strokeWidth="0.5" />
+            <line x1="85" y1="-3" x2="85" y2="3" stroke="rgba(255,255,255,0.2)" strokeWidth="0.5" />
+            <text x="0" y="-95" textAnchor="middle" fill="rgba(255,255,255,0.25)" fontFamily="monospace" fontSize="8">Ø110mm</text>
+          </g>
+          <path d="M10 10 L25 10 M10 10 L10 25" stroke="rgba(255,255,255,0.15)" strokeWidth="0.8" />
+          <path d="M310 10 L295 10 M310 10 L310 25" stroke="rgba(255,255,255,0.15)" strokeWidth="0.8" />
+          <text x="10" y="230" fill="rgba(255,255,255,0.2)" fontFamily="monospace" fontSize="7">{`CNC-001 // POM-C`}</text>
+        </svg>
+      ),
+    },
+    {
+      meta: "Laser CO₂ / PMMA", title: "Podświetlane litery reklamowe",
+      desc: "Cięcie laserowe z plexi 3mm mlecznej. Grawer konturowy + wycinanie. Seria 8 szt. dla salonu.",
+      code: "LASER-007 // PMMA-3mm",
+      svg: (id: string) => (
+        <svg viewBox="0 0 320 240" width="100%">
+          {gridPattern(id)}<rect width="320" height="240" fill={`url(#${id})`} />
+          <g transform="translate(160,120)">
+            <rect x="-110" y="-42" width="220" height="84" rx="2" fill="none" stroke="var(--blue)" strokeWidth="1" />
+            <text x="0" y="14" textAnchor="middle" fontFamily="monospace" fontSize="38" fontWeight="bold" fill="none" stroke="var(--blue)" strokeWidth="1.2" letterSpacing="4">SINSI</text>
+            <circle cx="82" cy="-30" r="3" fill="var(--blue)" opacity="0.8" />
+            <circle cx="82" cy="-30" r="7" fill="none" stroke="var(--blue)" strokeWidth="0.5" opacity="0.4" />
+            {[-32,-20,-8,4,16,28,40].map(y => <line key={y} x1="-108" y1={y} x2="108" y2={y} stroke="rgba(100,180,255,0.12)" strokeWidth="0.5" />)}
+          </g>
+          <text x="10" y="230" fill="rgba(255,255,255,0.2)" fontFamily="monospace" fontSize="7">LASER-007 // PMMA-3mm</text>
+        </svg>
+      ),
+    },
+    {
+      meta: "CNC / Poliwęglan 6mm", title: "Panel obudowy elektronicznej",
+      desc: "Frezowanie CNC z PC 6mm z wycinaniem otworów montażowych. Prototyp + seria 50 szt.",
+      code: "CNC-014 // PC-6mm",
+      svg: (id: string) => (
+        <svg viewBox="0 0 320 240" width="100%">
+          {gridPattern(id)}<rect width="320" height="240" fill={`url(#${id})`} />
+          <g transform="translate(160,120)">
+            <rect x="-90" y="-58" width="180" height="116" rx="2" fill="none" stroke="var(--gold)" strokeWidth="1.2" />
+            {[[-74,-42],[74,-42],[-74,42],[74,42]].map(([cx,cy]) => <circle key={`${cx},${cy}`} cx={cx} cy={cy} r="5" fill="none" stroke="var(--gold)" strokeWidth="0.8" />)}
+            <rect x="-50" y="-28" width="100" height="56" rx="1" fill="none" stroke="var(--gold)" strokeWidth="0.8" strokeDasharray="4 2" />
+            <line x1="-90" y1="-72" x2="90" y2="-72" stroke="rgba(255,255,255,0.2)" strokeWidth="0.5" />
+            <line x1="-90" y1="-69" x2="-90" y2="-75" stroke="rgba(255,255,255,0.2)" strokeWidth="0.5" />
+            <line x1="90" y1="-69" x2="90" y2="-75" stroke="rgba(255,255,255,0.2)" strokeWidth="0.5" />
+            <text x="0" y="-77" textAnchor="middle" fill="rgba(255,255,255,0.25)" fontFamily="monospace" fontSize="8">180mm</text>
+            <line x1="104" y1="-58" x2="104" y2="58" stroke="rgba(255,255,255,0.2)" strokeWidth="0.5" />
+            <text x="115" y="4" fill="rgba(255,255,255,0.25)" fontFamily="monospace" fontSize="8">116mm</text>
+          </g>
+          <text x="10" y="230" fill="rgba(255,255,255,0.2)" fontFamily="monospace" fontSize="7">CNC-014 // PC-6mm</text>
+        </svg>
+      ),
+    },
+    {
+      meta: "CNC / PA6-GF30", title: "Kołnierz z poliamidu",
+      desc: "Toczenie + frezowanie CNC z PA6-GF30. Sześć otworów gwintowanych M8 na okręgu podziałowym.",
+      code: "CNC-021 // PA6-GF30",
+      svg: (id: string) => (
+        <svg viewBox="0 0 320 240" width="100%">
+          {gridPattern(id)}<rect width="320" height="240" fill={`url(#${id})`} />
+          <g transform="translate(160,120)">
+            <circle r="80" fill="none" stroke="var(--gold)" strokeWidth="1" />
+            <circle r="60" fill="none" stroke="var(--gold)" strokeWidth="0.7" strokeDasharray="4 3" />
+            <circle r="22" fill="none" stroke="var(--gold)" strokeWidth="1.2" />
+            {[[0,-60],[52,-30],[52,30],[0,60],[-52,30],[-52,-30]].map(([cx,cy]) => <circle key={`${cx},${cy}`} cx={cx} cy={cy} r="7" fill="none" stroke="var(--gold)" strokeWidth="0.8" />)}
+            <line x1="-85" y1="0" x2="85" y2="0" stroke="rgba(255,255,255,0.1)" strokeWidth="0.5" strokeDasharray="6 3" />
+            <line x1="0" y1="-85" x2="0" y2="85" stroke="rgba(255,255,255,0.1)" strokeWidth="0.5" strokeDasharray="6 3" />
+            <text x="0" y="100" textAnchor="middle" fill="rgba(255,255,255,0.2)" fontFamily="monospace" fontSize="8">PCD Ø120mm · 6×M8</text>
+          </g>
+          <text x="10" y="230" fill="rgba(255,255,255,0.2)" fontFamily="monospace" fontSize="7">CNC-021 // PA6-GF30</text>
+        </svg>
+      ),
+    },
+    {
+      meta: "Laser CO₂ / Dibond 3mm", title: "Dekoracyjny panel Dibond",
+      desc: "Cięcie i grawerowanie laserowe z dibondu. Panel dekoracyjny 600×400mm. Ozdobne wycięcia CNC.",
+      code: "LASER-019 // DIBOND-3mm",
+      svg: (id: string) => (
+        <svg viewBox="0 0 320 240" width="100%">
+          {gridPattern(id)}<rect width="320" height="240" fill={`url(#${id})`} />
+          <g transform="translate(160,120)">
+            <rect x="-100" y="-65" width="200" height="130" rx="2" fill="none" stroke="var(--blue)" strokeWidth="1" />
+            <rect x="-85" y="-50" width="50" height="50" rx="4" fill="none" stroke="var(--blue)" strokeWidth="0.7" />
+            <rect x="-85" y="8" width="50" height="42" rx="4" fill="none" stroke="var(--blue)" strokeWidth="0.7" />
+            <rect x="-27" y="-50" width="114" height="100" rx="2" fill="none" stroke="var(--blue)" strokeWidth="0.7" />
+            <line x1="-60" y1="-50" x2="-60" y2="50" stroke="rgba(100,180,255,0.2)" strokeWidth="0.5" />
+            <line x1="-85" y1="-17" x2="-35" y2="-17" stroke="rgba(100,180,255,0.2)" strokeWidth="0.5" />
+            <line x1="-27" y1="-50" x2="87" y2="50" stroke="rgba(100,180,255,0.15)" strokeWidth="0.5" />
+            <line x1="87" y1="-50" x2="-27" y2="50" stroke="rgba(100,180,255,0.15)" strokeWidth="0.5" />
+            <circle cx="30" cy="0" r="20" fill="none" stroke="var(--blue)" strokeWidth="0.7" opacity="0.6" />
+          </g>
+          <text x="10" y="230" fill="rgba(255,255,255,0.2)" fontFamily="monospace" fontSize="7">LASER-019 // DIBOND-3mm</text>
+        </svg>
+      ),
+    },
+    {
+      meta: "CNC / POM-C 20mm", title: "Listwa prowadząca ślizgacza",
+      desc: "Frezowanie CNC z POM-C. Sześć otworów pod łożyska ślizgowe, tolerancja H7. 10 szt.",
+      code: "CNC-033 // POM-C-20mm",
+      svg: (id: string) => (
+        <svg viewBox="0 0 320 240" width="100%">
+          {gridPattern(id)}<rect width="320" height="240" fill={`url(#${id})`} />
+          <g transform="translate(160,120)">
+            <rect x="-110" y="-22" width="220" height="44" rx="2" fill="none" stroke="var(--gold)" strokeWidth="1.2" />
+            <rect x="-110" y="-8" width="220" height="16" fill="none" stroke="var(--gold)" strokeWidth="0.6" opacity="0.5" />
+            {[-88,-56,-24,8,40,72].map(cx => <circle key={cx} cx={cx} cy={0} r="8" fill="none" stroke="var(--gold)" strokeWidth="0.8" />)}
+            <rect x="92" y="-10" width="18" height="20" rx="9" fill="none" stroke="var(--gold)" strokeWidth="0.8" />
+            <rect x="-110" y="-10" width="18" height="20" rx="9" fill="none" stroke="var(--gold)" strokeWidth="0.8" />
+            <line x1="-110" y1="-36" x2="110" y2="-36" stroke="rgba(255,255,255,0.2)" strokeWidth="0.5" />
+            <text x="0" y="-42" textAnchor="middle" fill="rgba(255,255,255,0.25)" fontFamily="monospace" fontSize="8">220mm · 6× Ø16mm</text>
+          </g>
+          <text x="10" y="230" fill="rgba(255,255,255,0.2)" fontFamily="monospace" fontSize="7">CNC-033 // POM-C-20mm</text>
+        </svg>
+      ),
+    },
+  ];
+
+  return (
+    <section id="realizacje" style={{ background: "var(--bg)", borderTop: "1px solid var(--border)", padding: "120px 60px" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "60px", alignItems: "end", marginBottom: "72px" }}>
+        <div>
+          <SectionLabel num="06">Realizacje</SectionLabel>
+          <h2 className="reveal" style={{ fontSize: "clamp(36px,4vw,60px)", fontWeight: 700, letterSpacing: "-0.04em", lineHeight: 1.05 }}>
+            Projekty,<br />które <em style={{ fontStyle: "normal", color: "var(--gold)" }}>zrealizowaliśmy.</em>
+          </h2>
+        </div>
+        <p className="reveal reveal-delay-1" style={{ fontSize: "17px", color: "var(--text-dim)", maxWidth: "520px", lineHeight: 1.7, fontWeight: 400 }}>
+          Precyzyjne elementy z tworzyw technicznych — od prototypów po serie. Każdy projekt to inne wymagania, jeden standard wykonania.
+        </p>
+      </div>
+
+      <div className="reveal" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "1px", background: "var(--border)", border: "1px solid var(--border)" }}>
+        {cards.map((card, i) => (
+          <div key={i} style={{ background: "var(--bg2)", overflow: "hidden", cursor: "pointer", position: "relative" }}
+            onMouseEnter={e => (e.currentTarget.style.background = "var(--bg3)")}
+            onMouseLeave={e => (e.currentTarget.style.background = "var(--bg2)")}>
+            <div style={{ aspectRatio: "4/3", background: "var(--bg3)", display: "flex", alignItems: "center", justifyContent: "center", borderBottom: "1px solid var(--border)", overflow: "hidden" }}>
+              {card.svg(`gp${i}`)}
+            </div>
+            <div style={{ padding: "28px 28px 32px" }}>
+              <div style={{ fontFamily: "var(--font-mono),monospace", fontSize: "10px", color: "var(--text-muted)", letterSpacing: "0.12em", marginBottom: "10px" }}>{card.meta}</div>
+              <h3 style={{ fontSize: "17px", fontWeight: 600, letterSpacing: "-0.02em", marginBottom: "8px" }}>{card.title}</h3>
+              <p style={{ fontSize: "13px", color: "var(--text-dim)", lineHeight: 1.6 }}>{card.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="reveal" style={{ textAlign: "center", marginTop: "48px" }}>
+        <a href="#wycena" style={{ display: "inline-flex", alignItems: "center", gap: "10px", background: "transparent", color: "var(--text)", fontFamily: "var(--font-head),sans-serif", fontSize: "14px", fontWeight: 500, letterSpacing: "0.04em", padding: "16px 32px", borderRadius: "2px", border: "1px solid var(--border-light)", textDecoration: "none", transition: "border-color 0.2s,background 0.2s" }}
+          onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.3)"; e.currentTarget.style.background = "rgba(255,255,255,0.04)"; }}
+          onMouseLeave={e => { e.currentTarget.style.borderColor = "var(--border-light)"; e.currentTarget.style.background = "transparent"; }}>
+          Wyceń podobny projekt →
+        </a>
+      </div>
+    </section>
+  );
+}
+
 /* ─── Quote / CTA ─── */
 function Quote() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -414,7 +583,7 @@ function Quote() {
     <section id="wycena" style={{ background: "var(--bg2)", borderTop: "1px solid var(--border)", padding: "120px 60px" }}>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "100px", alignItems: "start" }}>
         <div>
-          <SectionLabel num="06">Kontakt</SectionLabel>
+          <SectionLabel num="07">Kontakt</SectionLabel>
           <h2 className="reveal" style={{ fontSize: "clamp(40px,4.5vw,68px)", fontWeight: 700, letterSpacing: "-0.04em", lineHeight: 1.0, marginBottom: "24px" }}>
             Wyceń<br />swój <em style={{ fontStyle: "normal", color: "var(--gold)" }}>projekt.</em>
           </h2>
@@ -475,35 +644,6 @@ function Quote() {
   );
 }
 
-/* ─── Footer ─── */
-function Footer() {
-  return (
-    <footer style={{ position: "relative", zIndex: 1, background: "var(--bg)", borderTop: "1px solid var(--border)", padding: "64px 60px 40px" }}>
-      <div style={{ display: "grid", gridTemplateColumns: "1.5fr 1fr 1fr 1fr", gap: "60px", paddingBottom: "48px", borderBottom: "1px solid var(--border)", marginBottom: "32px" }}>
-        <div>
-          <div style={{ fontSize: "20px", fontWeight: 700, letterSpacing: "-0.02em", display: "inline-block", marginBottom: "4px" }}>Sinsi<span style={{ color: "var(--gold)" }}>Tech</span></div>
-          <p style={{ fontSize: "14px", color: "var(--text-dim)", lineHeight: 1.7, marginTop: "16px", maxWidth: "280px" }}>Precyzyjna obróbka tworzyw sztucznych. Frezowanie CNC, laser CO₂, prototypy i serie. Tczew i cała Polska.</p>
-        </div>
-        {[
-          { title: "Usługi", links: [{ l: "Frezowanie CNC", h: "#uslugi" },{ l: "Laser CO₂", h: "#uslugi" },{ l: "Tworzywa sztuczne", h: "#uslugi" },{ l: "Prototypy i serie", h: "#uslugi" }] },
-          { title: "Materiały", links: [{ l: "PMMA (Plexi)", h: "#materialy" },{ l: "Poliwęglan PC", h: "#materialy" },{ l: "POM, PA6, PE", h: "#materialy" },{ l: "Dibond, PVC", h: "#materialy" }] },
-          { title: "Kontakt", links: [{ l: "biuro@sinsitech.pl", h: "mailto:biuro@sinsitech.pl" },{ l: "+48 536 095 840", h: "tel:+48536095840" },{ l: "+48 570 616 613", h: "tel:+48570616613" },{ l: "Wyceń projekt", h: "#wycena" }] },
-        ].map(col => (
-          <div key={col.title}>
-            <h5 style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--text-dim)", fontFamily: "var(--font-mono),monospace", marginBottom: "20px" }}>{col.title}</h5>
-            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "12px" }}>
-              {col.links.map(lk => <li key={lk.l}><a href={lk.h} style={{ fontSize: "14px", color: "var(--text-dim)", textDecoration: "none", transition: "color 0.2s" }} onMouseEnter={hoverDim} onMouseLeave={hoverDimOut}>{lk.l}</a></li>)}
-            </ul>
-          </div>
-        ))}
-      </div>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", fontFamily: "var(--font-mono),monospace", fontSize: "11px", color: "var(--text-muted)", letterSpacing: "0.08em" }}>
-        <span>© 2026 Sinsi Tech — Remigiusz Miąskowski, Paweł Kucharski s.c. · NIP: PL5932627119</span>
-        <span>Tczew, woj. pomorskie · Obsługujemy całą Polskę</span>
-      </div>
-    </footer>
-  );
-}
 
 /* ─── Page ─── */
 export default function Home() {
@@ -531,6 +671,7 @@ export default function Home() {
         <Process />
         <Materials />
         <Testimonials />
+        <Gallery />
         <Quote />
       </main>
       <Footer />
